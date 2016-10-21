@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+// Apply plugin
+apply plugin: 'com.neenbedankt.android-apt'
+ext {
+  versionMajor = 1
+  versionMinor = 0
+  versionPatch = 0
+}
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion "25.0.0"
+  defaultConfig {
+    applicationId "com.dugun"
+    minSdkVersion 16
+    targetSdkVersion 25
+    versionCode getAppVersionCode()
+    versionName getAppVersionName()
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+
+  final VC_DAGGER = '2.7'
+  final VC_BUTTERKNIFE = '8.4.0'
+
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  compile 'com.android.support:appcompat-v7:25.0.0'
+
+  //dependency injection libraries
+  compile "com.google.dagger:dagger:$VC_DAGGER"
+  apt "com.google.dagger:dagger-compiler:$VC_DAGGER"
+  compile "com.jakewharton:butterknife:$VC_BUTTERKNIFE"
+  apt "com.jakewharton:butterknife-compiler:$VC_BUTTERKNIFE"
+
+  testCompile 'junit:junit:4.12'
+}
+
+def getAppVersionCode() {
+  return (versionMajor * 100) + (versionMinor * 10) + (versionPatch)
+}
+
+def getAppVersionName() {
+  return "${versionMajor}.${versionMinor}.${versionPatch}";
+}
