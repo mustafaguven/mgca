@@ -50,7 +50,8 @@ dependencies {
 
   //http client
   compile "com.squareup.retrofit2:retrofit:$VC_RETROFIT"
-  compile "com.squareup.retrofit2:converter-gson:$VC_RETROFIT"
+  compile "com.squareup.retrofit2:converter-gson:$VC_RETROFIT" // to use gson within retrofit2
+  compile "com.squareup.retrofit2:adapter-rxjava:$VC_RETROFIT" // to use rx with retrofit2
 
   //rx
   compile "io.reactivex:rxandroid:$VC_RXANDROID"
