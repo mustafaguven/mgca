@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dugun">
+
 
   <application
       android:name=".application.DugunApplication"
@@ -10,12 +12,16 @@
       android:theme="@style/AppTheme">
 
     <activity
-        android:name=".login.LoginActivity"
-        android:screenOrientation="portrait">
+        android:name=".view.login.LoginActivity"
+        android:label="@string/app_name"></activity>
+    <activity
+        android:name=".view.splash.SplashActivity"
+        android:noHistory="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
+
     </activity>
 
   </application>

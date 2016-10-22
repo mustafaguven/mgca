@@ -1,4 +1,4 @@
-package com.dugun.login;
+package com.dugun.view.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,10 +6,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dugun.R;
-import com.dugun.base.BaseActivity;
 import com.dugun.di.component.LoginActivityComponent;
 import com.dugun.di.module.LoginActivityModule;
 import com.dugun.di.name.Name;
+import com.dugun.view.base.BaseActivity;
 import javax.inject.Inject;
 import javax.inject.Named;
 

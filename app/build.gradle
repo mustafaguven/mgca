@@ -30,6 +30,10 @@ dependencies {
 
   final VC_DAGGER = '2.7'
   final VC_BUTTERKNIFE = '8.4.0'
+  final VC_RETROFIT = '2.1.0'
+  final VC_RXJAVA = '1.2.1'
+  final VC_RXANDROID = '1.2.1'
+  final VC_OTTO = '1.3.8'
 
   compile fileTree(dir: 'libs', include: ['*.jar'])
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -42,6 +46,17 @@ dependencies {
   apt "com.google.dagger:dagger-compiler:$VC_DAGGER"
   compile "com.jakewharton:butterknife:$VC_BUTTERKNIFE"
   apt "com.jakewharton:butterknife-compiler:$VC_BUTTERKNIFE"
+
+  //http client
+  compile "com.squareup.retrofit2:retrofit:$VC_RETROFIT"
+  compile "com.squareup.retrofit2:converter-gson:$VC_RETROFIT"
+
+  //rx
+  compile "io.reactivex:rxandroid:$VC_RXANDROID"
+  compile "io.reactivex:rxjava:$VC_RXJAVA"
+
+  //event-bus
+  compile "com.squareup:otto:$VC_OTTO"
 
   testCompile 'junit:junit:4.12'
 }
