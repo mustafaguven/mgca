@@ -11,6 +11,7 @@ import com.dugun.di.module.SplashActivityModule;
 import com.dugun.flow_controller.FlowController;
 import com.dugun.view.base.BaseActivity;
 import com.squareup.picasso.Picasso;
+import hugo.weaving.DebugLog;
 import javax.inject.Inject;
 
 public class SplashActivity extends BaseActivity {
@@ -21,7 +22,7 @@ public class SplashActivity extends BaseActivity {
 
   private SplashActivityComponent component;
 
-  @Override public void onCreate(
+  @DebugLog @Override public void onCreate(
       Bundle savedInstanceState
   ) {
     super.onCreate(savedInstanceState);

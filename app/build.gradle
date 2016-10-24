@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-// Apply plugin
+apply plugin: 'hugo'
 apply plugin: 'com.neenbedankt.android-apt'
+
 ext {
   versionMajor = 1
   versionMinor = 0
@@ -62,6 +63,7 @@ dependencies {
 
   //image downloading-caching
   compile "com.squareup.picasso:picasso:$VC_PICASSO"
+
 
   testCompile 'junit:junit:4.12'
 }
