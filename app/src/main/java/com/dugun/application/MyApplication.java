@@ -2,11 +2,11 @@ package com.dugun.application;
 
 import android.app.Application;
 import com.dugun.di.component.ApplicationComponent;
-import com.dugun.di.component.DugunAppComponent;
+import com.dugun.di.component.MyAppComponent;
 import com.squareup.otto.Bus;
 import javax.inject.Inject;
 
-public class DugunApplication extends Application {
+public class MyApplication extends Application {
 
   private ApplicationComponent applicationComponent;
 
@@ -19,7 +19,7 @@ public class DugunApplication extends Application {
 
   private void injectComponents() {
     if (this.applicationComponent == null) {
-      this.applicationComponent = DugunAppComponent.InitiliazerClass.init(this);
+      this.applicationComponent = MyAppComponent.InitiliazerClass.init(this);
     }
     this.applicationComponent.inject(this);
   }

@@ -1,19 +1,27 @@
 package com.dugun.di.module;
 
-import com.dugun.application.DugunApplication;
+import com.dugun.application.MyApplication;
+import com.dugun.util.DeviceUtil;
 import dagger.Module;
 import dagger.Provides;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Module public class ApplicationModule {
 
-  private final DugunApplication application;
+  private final MyApplication application;
 
-  public ApplicationModule(DugunApplication application) {
+  @Inject DeviceUtil deviceUtil;
+
+  public ApplicationModule(MyApplication application) {
     this.application = application;
   }
 
-  @Provides @Singleton DugunApplication provideDugunApplication() {
+  @Provides @Singleton MyApplication provideMyApplication() {
     return this.application;
+  }
+
+  public DeviceUtil getDeviceUtil() {
+    return this.deviceUtil;
   }
 }
