@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import com.dugun.application.MyApplication;
-import com.dugun.util.DeviceUtil;
 import com.squareup.otto.Bus;
+import hugo.weaving.DebugLog;
 import javax.inject.Inject;
+import rx.subscriptions.CompositeSubscription;
+import timber.log.Timber;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
   @Inject Bus bus;
+  @Inject CompositeSubscription subscriptions;
 
   @Override public void onCreate(
       Bundle savedInstanceState, PersistableBundle persistentState
@@ -30,5 +33,11 @@ public class BaseActivity extends AppCompatActivity {
   @Override protected void onStop() {
     bus.unregister(this);
     super.onStop();
+  }
+
+  @Override protected void onDestroy() {
+    Timber.d("onDestroy => subscriptions.unsubscribe()");
+    subscriptions.unsubscribe();
+    super.onDestroy();
   }
 }

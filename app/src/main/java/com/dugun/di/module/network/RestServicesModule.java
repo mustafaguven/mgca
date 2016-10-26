@@ -1,4 +1,4 @@
-package com.dugun.di.module;
+package com.dugun.di.module.network;
 
 import com.dugun.network.EndPoints;
 import com.dugun.network.TestService;

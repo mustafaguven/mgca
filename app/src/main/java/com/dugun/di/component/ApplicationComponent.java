@@ -1,8 +1,8 @@
 package com.dugun.di.component;
 
 import com.dugun.application.MyApplication;
-import com.dugun.di.module.LoginActivityModule;
-import com.dugun.di.module.SplashActivityModule;
+import com.dugun.di.module.activity.LoginActivityModule;
+import com.dugun.di.module.activity.SplashActivityModule;
 
 public interface ApplicationComponent {
 

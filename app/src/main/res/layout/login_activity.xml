@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     >
 
-  <com.dugun.customview.RevealBackgroundView
-      android:id="@+id/vRevealBackground"
+  <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      />
-
-  <TextView
-      android:id="@+id/label"
-      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:textSize="20sp"
-      tools:text="Burada yazı yazar"
-      />
+      >
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"
+        />
 
+    <EditText
+        android:id="@+id/evMail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivLogo"
+        android:layout_centerInParent="true"
+        android:hint="@string/login_evMail_hint"
+        android:imeOptions="actionDone"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:singleLine="true"
+        />
+
+    <EditText
+        android:id="@+id/evPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/evMail"
+        android:layout_centerInParent="true"
+        android:hint="@string/login_evPassword_hint"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:singleLine="true"
+        />
+  </RelativeLayout>
 </RelativeLayout>

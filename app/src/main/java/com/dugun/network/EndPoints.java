@@ -1,8 +1,8 @@
 package com.dugun.network;
 
+import com.dugun.BuildConfig;
+
 public final class EndPoints {
 
-  private static final String BASE_URL = "http://jsonplaceholder.typicode.com";
-
-  public static final String TEST_SERVICE = BASE_URL;
+  public static final String TEST_SERVICE = BuildConfig.BASE_URL;
 }

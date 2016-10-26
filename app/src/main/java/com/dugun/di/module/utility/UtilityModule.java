@@ -1,4 +1,4 @@
-package com.dugun.di.module;
+package com.dugun.di.module.utility;
 
 import android.os.AsyncTask;
 import com.dugun.di.name.Name;
@@ -24,11 +24,11 @@ import rx.schedulers.Schedulers;
     return new GsonBuilder().create();
   }
 
-  @Provides @Singleton @Named(Name.MAIN) public Scheduler provideMainScheduler() {
+  @Provides @Singleton @Named(Name.MAIN_SCHEDULER) public Scheduler provideMainScheduler() {
     return AndroidSchedulers.mainThread();
   }
 
-  @Provides @Singleton @Named(Name.WORKER) public Scheduler provideWorkerScheduler() {
+  @Provides @Singleton @Named(Name.WORKER_SCHEDULER) public Scheduler provideWorkerScheduler() {
     return Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 }

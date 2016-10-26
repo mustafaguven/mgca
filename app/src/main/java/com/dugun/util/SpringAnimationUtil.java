@@ -10,8 +10,10 @@ import javax.inject.Singleton;
 
 @Singleton public class SpringAnimationUtil implements SpringListener {
 
-  private final static double TENSION = 800;
-  private final static double DAMPER = 20; //friction
+  private final static double TENSION = 100;
+  private final static double FRICTION = 10;
+  private static float RUN_SCALE = 1.5f;
+  private static float REST_SCALE = 0f;
   private Spring mSpring;
   private final Bus bus;
 
@@ -20,15 +22,12 @@ import javax.inject.Singleton;
     SpringSystem mSpringSystem = SpringSystem.create();
     mSpring = mSpringSystem.createSpring();
     mSpring.addListener(this);
-    SpringConfig config = new SpringConfig(TENSION, DAMPER);
+    SpringConfig config = new SpringConfig(TENSION, FRICTION);
     mSpring.setSpringConfig(config);
   }
 
   @Override public void onSpringUpdate(Spring spring) {
     bus.post(new UpdateEvent(EventType.ON_UPDATE, spring, getScale(spring)));
-    if (getScale(spring) < 0.7f) {
-      setEndValue(0f);
-    }
   }
 
   @Override public void onSpringAtRest(Spring spring) {
@@ -45,15 +44,19 @@ import javax.inject.Singleton;
 
   private float getScale(Spring spring) {
     float value = (float) spring.getCurrentValue();
-    return 1f - (value * 0.5f);
+    return 1f + (value * RUN_SCALE);
   }
 
-  public void setEndValue(float val) {
+  private void setEndValue(float val) {
     mSpring.setEndValue(val);
   }
 
   public void run() {
-    setEndValue(1f);
+    setEndValue(RUN_SCALE);
+  }
+
+  public void rest() {
+    setEndValue(REST_SCALE);
   }
 
   public final class UpdateEvent {
@@ -81,5 +84,5 @@ import javax.inject.Singleton;
     }
   }
 
-  private enum EventType {ON_UPDATE, AT_REST, ON_ACTIVATE, ON_ENDSTATECHANGE}
+  public enum EventType {ON_UPDATE, AT_REST, ON_ACTIVATE, ON_ENDSTATECHANGE}
 }

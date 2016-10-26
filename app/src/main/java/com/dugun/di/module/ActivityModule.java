@@ -2,9 +2,11 @@ package com.dugun.di.module;
 
 import android.app.Activity;
 import com.dugun.di.scopes.PerActivity;
+import com.dugun.util.KeyboardUtil;
 import com.squareup.picasso.Picasso;
 import dagger.Module;
 import dagger.Provides;
+import rx.subscriptions.CompositeSubscription;
 
 @Module public class ActivityModule {
   protected final Activity activity;
@@ -13,11 +15,19 @@ import dagger.Provides;
     this.activity = activity;
   }
 
-  @Provides @PerActivity Activity provideActivityContext() {
+  public @Provides @PerActivity Activity provideActivityContext() {
     return this.activity;
   }
 
-  @Provides @PerActivity Picasso providePicasso() {
+  public @Provides @PerActivity Picasso providePicasso() {
     return Picasso.with(this.activity);
+  }
+
+  public @Provides @PerActivity KeyboardUtil provideKeyboardUtil() {
+    return new KeyboardUtil(this.activity);
+  }
+
+  public @Provides @PerActivity CompositeSubscription provideCompositeSubscription() {
+    return new CompositeSubscription();
   }
 }

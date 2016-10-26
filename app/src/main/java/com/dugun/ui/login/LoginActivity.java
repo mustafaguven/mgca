@@ -2,36 +2,43 @@ package com.dugun.ui.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.view.ViewTreeObserver;
+import android.support.annotation.StringRes;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnEditorAction;
 import com.dugun.R;
-import com.dugun.constant.BundleKey;
-import com.dugun.customview.RevealBackgroundView;
 import com.dugun.di.component.LoginActivityComponent;
-import com.dugun.di.module.LoginActivityModule;
-import com.dugun.di.name.Name;
+import com.dugun.di.module.activity.LoginActivityModule;
 import com.dugun.model.TestModel;
-import com.dugun.network.TestService;
-import com.dugun.ui.base.BaseActivity;
+import com.dugun.ui.base.RevealBackgroundedActivity;
+import com.dugun.util.KeyboardUtil;
 import javax.inject.Inject;
-import javax.inject.Named;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends RevealBackgroundedActivity implements LoginMvp.View {
 
-  @BindView(R.id.vRevealBackground) RevealBackgroundView vRevealBackground;
-  @BindView(R.id.label) TextView label;
-  @Inject TestService testService;
-  @Inject @Named(Name.WORKER) Scheduler worker;
-  @Inject @Named(Name.MAIN) Scheduler main;
+  @Inject KeyboardUtil keyboardUtil;
+  @Inject LoginMvp.Presenter presenter;
+
+  @BindView(R.id.evMail) EditText evMail;
+  @BindView(R.id.evPassword) EditText evPassword;
 
   private LoginActivityComponent loginComponent;
+
+  @OnEditorAction({ R.id.evMail, R.id.evPassword }) boolean onEditorAction(
+      TextView v, int actionId, KeyEvent event
+  ) {
+    if (actionId == EditorInfo.IME_ACTION_DONE) {
+      keyboardUtil.hideKeyboard();
+      presenter.onLoginClicked(evMail.getText().toString(), evPassword.getText().toString());
+      return true;
+    }
+    return false;
+  }
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -43,40 +50,25 @@ public class LoginActivity extends BaseActivity {
 
     setContentView(R.layout.login_activity);
     ButterKnife.bind(this);
-
-    setupRevealBackground(getIntent().getBundleExtra(BundleKey.STARTING_LOCATION));
-    Observable<TestModel> testModel =
-        testService.getTestModel("1").subscribeOn(worker).observeOn(main);
-    testModel.subscribe(new Subscriber<TestModel>() {
-      @Override public void onCompleted() {
-        Log.e("oncompleted", "asdasd");
-      }
-
-      @Override public void onError(Throwable e) {
-        Log.e("error", e.getMessage());
-      }
-
-      @Override public void onNext(TestModel testModel) {
-        Log.e("onnext", testModel.getTitle());
-        label.setText(testModel.getBody());
-      }
-    });
+    setupRevealBackground();
   }
 
-  private void setupRevealBackground(Bundle savedInstanceState) {
-    vRevealBackground.setFillPaintColor(ContextCompat.getColor(this, R.color.colorPrimary));
-    if (savedInstanceState == null) {
-      final int[] startingLocation = getIntent().getIntArrayExtra(BundleKey.STARTING_LOCATION);
-      vRevealBackground.getViewTreeObserver()
-          .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override public boolean onPreDraw() {
-              vRevealBackground.getViewTreeObserver().removeOnPreDrawListener(this);
-              vRevealBackground.startFromLocation(startingLocation);
-              return true;
-            }
-          });
-    } else {
-      vRevealBackground.setToFinishedFrame();
-    }
+  @Override public void showTestModel(TestModel testModel) {
+    Toast.makeText(this, testModel.getBody(), Toast.LENGTH_SHORT).show();
+  }
+
+  @Override public void showInvalidMailWarning(@StringRes int resId) {
+    evMail.requestFocus();
+    evMail.setError(getString(resId));
+  }
+
+  @Override public void showInvalidPasswordWarning(@StringRes int resId) {
+    evPassword.requestFocus();
+    evPassword.setError(getString(resId));
+  }
+
+  @Override protected void onDestroy() {
+
+    super.onDestroy();
   }
 }

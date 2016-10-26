@@ -20,9 +20,29 @@ android {
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
+    def BOOLEAN = "boolean"
+    def STRING = "String"
+    def TRUE = "true"
+    def FALSE = "false"
+    def BASE_URL = "BASE_URL"
+
+    debug {
+      versionNameSuffix "-deb"
+      applicationIdSuffix ".development"
+      buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com"')
+    }
+
+    preprod.initWith(buildTypes.debug)
+    preprod {
+      versionNameSuffix "-pre"
+      applicationIdSuffix ".preprod"
+      buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/preprod"')
+    }
+
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/release"')
     }
   }
 }
@@ -38,11 +58,15 @@ dependencies {
   final VC_PICASSO = '2.5.2'
   final VC_SUPPORT = '25.0.0'
   final VC_REBOUND = '0.3.8'
+  final VC_TIMBER = '4.3.1'
+  final VC_LEAKCANARY = '1.5'
 
   compile fileTree(dir: 'libs', include: ['*.jar'])
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
+
+  //support lib
   compile "com.android.support:appcompat-v7:$VC_SUPPORT"
   compile "com.android.support:palette-v7:$VC_SUPPORT"
 
@@ -70,6 +94,13 @@ dependencies {
   //animation helpers
   compile "com.facebook.rebound:rebound:$VC_REBOUND"
 
+  //logging
+  compile "com.jakewharton.timber:timber:$VC_TIMBER"
+
+  //leakcanary
+  debugCompile "com.squareup.leakcanary:leakcanary-android:$VC_LEAKCANARY"
+  releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$VC_LEAKCANARY"
+  testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$VC_LEAKCANARY"
 
   testCompile 'junit:junit:4.12'
 }

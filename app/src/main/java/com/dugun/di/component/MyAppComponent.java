@@ -2,10 +2,10 @@ package com.dugun.di.component;
 
 import com.dugun.application.MyApplication;
 import com.dugun.di.module.ApplicationModule;
-import com.dugun.di.module.DeviceUtilModule;
-import com.dugun.di.module.RestServicesModule;
-import com.dugun.di.module.SpringAnimationUtilModule;
-import com.dugun.di.module.UtilityModule;
+import com.dugun.di.module.utility.DeviceUtilModule;
+import com.dugun.di.module.network.RestServicesModule;
+import com.dugun.di.module.utility.SpringAnimationUtilModule;
+import com.dugun.di.module.utility.UtilityModule;
 import dagger.Component;
 import javax.inject.Singleton;
 

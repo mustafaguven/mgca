@@ -71,7 +71,7 @@ public final class DeviceUtil {
     return (WindowManager) this.myApplication.getSystemService(Context.WINDOW_SERVICE);
   }
 
-  public int[] getStartingLocation(View view) {
+  public int[] findStartingLocation(View view) {
     int[] startingLocation = new int[2];
     view.getLocationOnScreen(startingLocation);
     startingLocation[0] = (startingLocation[0] + (view.getWidth() / 2));

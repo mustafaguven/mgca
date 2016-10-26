@@ -1,4 +1,4 @@
-package com.dugun.di.module;
+package com.dugun.di.module.utility;
 
 import com.dugun.application.MyApplication;
 import com.dugun.util.DeviceUtil;

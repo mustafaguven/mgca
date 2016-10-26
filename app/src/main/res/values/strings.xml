@@ -1,3 +1,7 @@
 <resources>
-  <string name="app_name">Dugun.com</string>
+  <string name="app_name">My App</string>
+  <string name="login_evMail_hint">email</string>
+  <string name="login_evPassword_hint">password</string>
+  <string name="login_invalid_evMail_text">Geçersiz mail adresi</string>
+  <string name="login_invalid_evPassword_text">Geçersiz şifre</string>
 </resources>
