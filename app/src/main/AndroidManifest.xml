@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dugun">
+    package="com.mgcleanarchitecture">
 
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
-      android:name=".application.MyApplication"
+      android:name="com.mgcleanarchitecture.application.MyApplication"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
@@ -15,12 +15,12 @@
       android:theme="@style/AppTheme">
 
     <activity
-        android:name=".ui.login.LoginActivity"
+        android:name="com.mgcleanarchitecture.ui.login.LoginActivity"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.TransparentActivity"
         />
     <activity
-        android:name=".ui.splash.SplashActivity">
+        android:name="com.mgcleanarchitecture.ui.splash.SplashActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
