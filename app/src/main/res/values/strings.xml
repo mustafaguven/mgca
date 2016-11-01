@@ -4,4 +4,8 @@
   <string name="login_evPassword_hint">password</string>
   <string name="login_invalid_evMail_text">Geçersiz mail adresi</string>
   <string name="login_invalid_evPassword_text">Geçersiz şifre</string>
+  <string name="login_btnLogin_text">Login</string>
+  <string name="login_cbRememberMe_text">Beni Hatırla</string>
+  <string name="main_activity">main_activity</string>
+  <string name="login_activity">login_activity</string>
 </resources>

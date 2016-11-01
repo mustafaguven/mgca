@@ -46,5 +46,27 @@
         android:minLines="1"
         android:singleLine="true"
         />
+    <CheckBox
+        android:id="@+id/cbRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/evPassword"
+        android:layout_alignLeft="@id/evPassword"
+        android:layout_alignRight="@id/evPassword"
+        android:layout_alignStart="@id/evPassword"
+        android:layout_below="@id/evPassword"
+        android:text="@string/login_cbRememberMe_text"
+        />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/cbRememberMe"
+        android:layout_alignLeft="@id/cbRememberMe"
+        android:layout_alignRight="@id/cbRememberMe"
+        android:layout_alignStart="@id/cbRememberMe"
+        android:layout_below="@id/cbRememberMe"
+        android:text="@string/login_btnLogin_text"
+        />
   </RelativeLayout>
 </RelativeLayout>

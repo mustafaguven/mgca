@@ -3,6 +3,7 @@ package com.mgcleanarchitecture.application;
 import android.app.Application;
 import com.mgcleanarchitecture.di.component.ApplicationComponent;
 import com.mgcleanarchitecture.di.component.MyAppComponent;
+import com.mgcleanarchitecture.security.AuthenticationController;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.otto.Bus;
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ public class MyApplication extends Application {
   private ApplicationComponent applicationComponent;
 
   @Inject Bus bus;
+  @Inject AuthenticationController authenticationController;
 
   @Override public void onCreate() {
     super.onCreate();
@@ -37,5 +39,9 @@ public class MyApplication extends Application {
 
   public Bus getBus() {
     return this.bus;
+  }
+
+  public AuthenticationController getAuthenticationController() {
+    return this.authenticationController;
   }
 }

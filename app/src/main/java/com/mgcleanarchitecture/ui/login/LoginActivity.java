@@ -10,10 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import com.mgcleanarchitecture.R;
 import com.mgcleanarchitecture.di.component.LoginActivityComponent;
 import com.mgcleanarchitecture.di.module.activity.LoginActivityModule;
+import com.mgcleanarchitecture.flow_controller.FlowController;
 import com.mgcleanarchitecture.model.TestModel;
 import com.mgcleanarchitecture.ui.base.RevealBackgroundedActivity;
 import com.mgcleanarchitecture.util.KeyboardUtil;
@@ -40,7 +42,11 @@ public class LoginActivity extends RevealBackgroundedActivity implements LoginMv
     return false;
   }
 
-  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+  @OnClick(R.id.btnLogin) void btnLoginClicked(){
+    FlowController.launchMainActivity(LoginActivity.this);
+  }
+
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (loginComponent == null) {
       loginComponent =
@@ -65,10 +71,5 @@ public class LoginActivity extends RevealBackgroundedActivity implements LoginMv
   @Override public void showInvalidPasswordWarning(@StringRes int resId) {
     evPassword.requestFocus();
     evPassword.setError(getString(resId));
-  }
-
-  @Override protected void onDestroy() {
-
-    super.onDestroy();
   }
 }

@@ -2,7 +2,6 @@ package com.mgcleanarchitecture.ui.login;
 
 import android.support.annotation.StringRes;
 import com.mgcleanarchitecture.model.TestModel;
-import com.mgcleanarchitecture.ui.base.PresenterLifecycle;
 import rx.Observable;
 
 public interface LoginMvp {
@@ -16,7 +15,7 @@ public interface LoginMvp {
     void showInvalidPasswordWarning(@StringRes int login_invalid_evPassword_text);
   }
 
-  interface Presenter extends PresenterLifecycle {
+  interface Presenter {
 
     void onLoginClicked(String toString, String s);
   }

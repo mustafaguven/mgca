@@ -1,6 +1,7 @@
 package com.mgcleanarchitecture.ui.login;
 
 import com.mgcleanarchitecture.R;
+import com.mgcleanarchitecture.cache.UserCache;
 import com.mgcleanarchitecture.di.scopes.PerActivity;
 import com.mgcleanarchitecture.model.TestModel;
 import com.mgcleanarchitecture.ui.base.BaseSubscriber;
@@ -13,17 +14,16 @@ import rx.subscriptions.CompositeSubscription;
   private final LoginMvp.View view;
   private final LoginMvp.Interactor interactor;
   private final CompositeSubscription subscriptions;
+  private final UserCache userPreference;
 
   @Inject LoginPresenter(
-      LoginMvp.View view, LoginMvp.Interactor interactor, CompositeSubscription subscriptions
+      LoginMvp.View view, LoginMvp.Interactor interactor, CompositeSubscription subscriptions,
+      UserCache userPreference
   ) {
     this.view = view;
     this.interactor = interactor;
     this.subscriptions = subscriptions;
-  }
-
-  @Override public void onCreate() {
-
+    this.userPreference = userPreference;
   }
 
   @Override public void onLoginClicked(String mail, String password) {
@@ -39,6 +39,7 @@ import rx.subscriptions.CompositeSubscription;
   private Subscription subscriberForTestModel() {
     return interactor.getTestModel().subscribe(new BaseSubscriber<TestModel>() {
       @Override public void onNext(TestModel testModel) {
+        userPreference.setUser(testModel);
         view.showTestModel(testModel);
       }
     });
@@ -50,9 +51,5 @@ import rx.subscriptions.CompositeSubscription;
 
   private boolean isValidPassword(String password) {
     return !password.isEmpty();
-  }
-
-  @Override public void onDestroy() {
-    subscriptions.unsubscribe();
   }
 }

@@ -1,7 +1,6 @@
 package com.mgcleanarchitecture.ui.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import com.mgcleanarchitecture.application.MyApplication;
 import com.squareup.otto.Bus;
@@ -15,9 +14,10 @@ public abstract class BaseActivity extends AppCompatActivity {
   @Inject CompositeSubscription subscriptions;
 
   @Override public void onCreate(
-      Bundle savedInstanceState, PersistableBundle persistentState
+      Bundle savedInstanceState
   ) {
-    super.onCreate(savedInstanceState, persistentState);
+    super.onCreate(savedInstanceState);
+    getMyApplication().getAuthenticationController().authenticate(this);
   }
 
   public MyApplication getMyApplication() {
