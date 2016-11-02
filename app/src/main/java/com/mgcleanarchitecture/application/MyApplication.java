@@ -4,7 +4,7 @@ import android.app.Application;
 import com.mgcleanarchitecture.di.component.ApplicationComponent;
 import com.mgcleanarchitecture.di.component.MyAppComponent;
 import com.mgcleanarchitecture.security.AuthenticationController;
-import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.squareup.otto.Bus;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -15,15 +15,12 @@ public class MyApplication extends Application {
 
   @Inject Bus bus;
   @Inject AuthenticationController authenticationController;
+  @Inject RefWatcher refWatcher;
 
   @Override public void onCreate() {
     super.onCreate();
     injectComponents();
     Timber.plant(new Timber.DebugTree());
-    if (LeakCanary.isInAnalyzerProcess(this)) {
-      return;
-    }
-    LeakCanary.install(this);
   }
 
   private void injectComponents() {

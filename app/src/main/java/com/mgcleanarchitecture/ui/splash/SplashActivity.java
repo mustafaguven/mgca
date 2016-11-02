@@ -2,9 +2,11 @@ package com.mgcleanarchitecture.ui.splash;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.mgcleanarchitecture.BuildConfig;
 import com.mgcleanarchitecture.R;
 import com.mgcleanarchitecture.di.component.SplashActivityComponent;
 import com.mgcleanarchitecture.di.module.activity.SplashActivityModule;
@@ -21,11 +23,12 @@ public class SplashActivity extends BaseActivity {
   @Inject SpringAnimationUtil springAnimationUtil;
   @Inject DeviceUtil deviceUtil;
 
-  @BindView(R.id.iv_splash) ImageView ivSplash;
+  @BindView(R.id.ivSplash) ImageView ivSplash;
+  @BindView(R.id.tvVersion) TextView tvVersion;
 
   private SplashActivityComponent component;
 
-  @OnClick(R.id.iv_splash) void ivSplashClicked() {
+  @OnClick(R.id.ivSplash) void ivSplashClicked() {
     FlowController.launchLoginActivity(
         SplashActivity.this, deviceUtil.findStartingLocation(ivSplash));
   }
@@ -42,6 +45,7 @@ public class SplashActivity extends BaseActivity {
     ButterKnife.bind(this);
 
     loadImages();
+    tvVersion.setText(BuildConfig.VERSION_NAME);
   }
 
   private void loadImages() {

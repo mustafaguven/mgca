@@ -19,6 +19,6 @@ import static org.junit.Assert.*;
     // Context of the app under test.
     Context appContext = InstrumentationRegistry.getTargetContext();
 
-    assertEquals("com.dugun", appContext.getPackageName());
+    assertEquals("com.mgcleanarchitecture", appContext.getPackageName());
   }
 }

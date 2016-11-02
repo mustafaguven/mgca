@@ -12,7 +12,7 @@ android {
   compileSdkVersion 25
   buildToolsVersion "25.0.0"
   defaultConfig {
-    applicationId "com.dugun"
+    applicationId "com.mgcleanarchitecture"
     minSdkVersion 16
     targetSdkVersion 25
     versionCode getAppVersionCode()
@@ -27,20 +27,21 @@ android {
     def BASE_URL = "BASE_URL"
 
     debug {
-      versionNameSuffix "-deb"
       applicationIdSuffix ".development"
+      versionNameSuffix " - dev" + " - " + getDate()
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com"')
     }
 
     preprod.initWith(buildTypes.debug)
     preprod {
-      versionNameSuffix "-pre"
       applicationIdSuffix ".preprod"
+      versionNameSuffix " - pre" + " - " + getDate()
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/preprod"')
     }
 
     release {
       minifyEnabled false
+      versionNameSuffix " - " + getDate()
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/release"')
     }
@@ -99,6 +100,7 @@ dependencies {
 
   //leakcanary
   debugCompile "com.squareup.leakcanary:leakcanary-android:$VC_LEAKCANARY"
+  preprodCompile "com.squareup.leakcanary:leakcanary-android:$VC_LEAKCANARY"
   releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$VC_LEAKCANARY"
   testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$VC_LEAKCANARY"
 
@@ -111,4 +113,8 @@ def getAppVersionCode() {
 
 def getAppVersionName() {
   return "${versionMajor}.${versionMinor}.${versionPatch}";
+}
+
+def getDate() {
+  return new Date().format('dd.MM.yyyy HH:mm')
 }
