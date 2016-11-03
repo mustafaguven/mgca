@@ -1,12 +1,8 @@
 package com.mgcleanarchitecture.security;
 
 import android.app.Activity;
-import com.mgarchitecture.generated.GeneratedClass;
-import com.mgcleanarchitecture.annotation.AuthenticationRequired;
 import com.mgcleanarchitecture.cache.ApplicationCache;
-import com.mgcleanarchitecture.flow_controller.FlowController;
 import javax.inject.Inject;
-import timber.log.Timber;
 
 public class AuthenticationController {
 
@@ -19,7 +15,7 @@ public class AuthenticationController {
   }
 
   public void authenticate(Activity activity) {
-    GeneratedClass generatedClass = new GeneratedClass();
+    //GeneratedClass generatedClass = new GeneratedClass();
     /*if (activity.getClass().isAnnotationPresent(AuthenticationRequired.class)) {
       Timber.d("authenticationRequired: yes");
       if (this.applicationCache.isUserAuthenticated()) {

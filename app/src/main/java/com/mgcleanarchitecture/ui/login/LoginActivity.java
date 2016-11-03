@@ -43,7 +43,8 @@ public class LoginActivity extends RevealBackgroundedActivity implements LoginMv
   }
 
   @OnClick(R.id.btnLogin) void btnLoginClicked(){
-    FlowController.launchMainActivity(LoginActivity.this);
+    throw new RuntimeException("ashjdjalsd");
+    //FlowController.launchMainActivity(LoginActivity.this);
   }
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {

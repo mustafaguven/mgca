@@ -1,6 +1,20 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'hugo'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'io.fabric'
+
+repositories {
+  maven { url 'https://maven.fabric.io/public' }
+}
 
 ext {
   versionMajor = 1
@@ -30,11 +44,13 @@ android {
     def TRUE = "true"
     def FALSE = "false"
     def BASE_URL = "BASE_URL"
+    def CRASHLYTICS = "CRASHLYTICS"
 
     debug {
       applicationIdSuffix ".development"
       versionNameSuffix " - dev" + " - " + getDate()
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com"')
+      buildConfigField(BOOLEAN, CRASHLYTICS, FALSE)
     }
 
     preprod.initWith(buildTypes.debug)
@@ -42,6 +58,7 @@ android {
       applicationIdSuffix ".preprod"
       versionNameSuffix " - pre" + " - " + getDate()
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/preprod"')
+      buildConfigField(BOOLEAN, CRASHLYTICS, TRUE)
     }
 
     release {
@@ -49,6 +66,7 @@ android {
       versionNameSuffix " - " + getDate()
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/release"')
+      buildConfigField(BOOLEAN, CRASHLYTICS, TRUE)
     }
 
     compileOptions {
@@ -71,6 +89,11 @@ dependencies {
   final VC_REBOUND = '0.3.8'
   final VC_TIMBER = '4.3.1'
   final VC_LEAKCANARY = '1.5'
+  final VC_CRASHLYTICS = '2.6.5@aar'
+  final VC_JUNIT = '4.12'
+  final VC_LOMBOK = '1.12.6'
+
+  provided "org.projectlombok:lombok:$VC_LOMBOK"
 
   compile fileTree(dir: 'libs', include: ['*.jar'])
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -114,7 +137,13 @@ dependencies {
   releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$VC_LEAKCANARY"
   testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$VC_LEAKCANARY"
 
-  testCompile 'junit:junit:4.12'
+  //crash reporting
+  compile("com.crashlytics.sdk.android:crashlytics:$VC_CRASHLYTICS") {
+    transitive = true;
+  }
+
+  testCompile "junit:junit:$VC_JUNIT"
+
 }
 
 // bof code generator

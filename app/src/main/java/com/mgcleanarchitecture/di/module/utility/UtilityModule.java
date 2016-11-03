@@ -1,9 +1,9 @@
 package com.mgcleanarchitecture.di.module.utility;
 
 import android.os.AsyncTask;
-import com.mgcleanarchitecture.di.name.Name;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mgcleanarchitecture.di.name.Name;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 import dagger.Module;

@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
@@ -33,10 +31,12 @@ import static javax.lang.model.SourceVersion.latestSupported;
   @Override public boolean process(
       Set<? extends TypeElement> set, RoundEnvironment roundEnvironment
   ) {
-    StringBuilder builder = new StringBuilder().append("package com.mgarchitecture.generated;\n\n")
-        .append("public class GeneratedClass {\n\n") // open class
-        .append("\tpublic String getMessage() {\n") // open method
-        .append("\t\treturn \"");
+    StringBuilder builder =
+        new StringBuilder().append("package com.mgcleanarchitecture.ui.main.MainActivity;\n\n")
+            .append("import com.mgcleanarchitecture.ui.base.BaseActivity;\n\n")
+            .append("public class MainActivity extends BaseActivity {\n\n") // open class
+            .append("\tpublic void onCreate() {\n") // open method
+            .append("\t\treturn \"");
 
     // for each javax.lang.model.element.Element annotated with the CustomAnnotation
     for (Element element : roundEnvironment.getElementsAnnotatedWith(CustomAnnotation.class)) {
@@ -52,7 +52,7 @@ import static javax.lang.model.SourceVersion.latestSupported;
 
     try { // write the file
       JavaFileObject source =
-          processingEnv.getFiler().createSourceFile("com.mgarchitecture.generated.GeneratedClass");
+          processingEnv.getFiler().createSourceFile("com.mgcleanarchitecture.ui.main.MainActivity");
 
       Writer writer = source.openWriter();
       writer.write(builder.toString());

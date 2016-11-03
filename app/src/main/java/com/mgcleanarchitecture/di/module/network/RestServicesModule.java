@@ -1,8 +1,8 @@
 package com.mgcleanarchitecture.di.module.network;
 
+import com.google.gson.Gson;
 import com.mgcleanarchitecture.network.EndPoints;
 import com.mgcleanarchitecture.network.TestService;
-import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;

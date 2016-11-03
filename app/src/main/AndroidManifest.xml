@@ -32,6 +32,10 @@
         android:label="@string/main_activity"
         android:theme="@style/AppTheme"
         />
+    <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="9b93f9276115e374372082d9675380bd9c03cd25"
+        />
 
   </application>
 
