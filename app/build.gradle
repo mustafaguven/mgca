@@ -146,14 +146,6 @@ dependencies {
 
 }
 
-// bof code generator
-task processorTask(type: Exec) {
-  commandLine 'cp', '../processor/build/libs/processor.jar', 'libs/'
-}
-processorTask.dependsOn(':processor:build')
-preBuild.dependsOn(processorTask)
-// eof code generator
-
 def getAppVersionCode() {
   return (versionMajor * 100) + (versionMinor * 10) + (versionPatch)
 }
