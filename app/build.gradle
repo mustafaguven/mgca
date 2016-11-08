@@ -50,7 +50,9 @@ android {
       applicationIdSuffix ".development"
       versionNameSuffix " - dev" + " - " + getDate()
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com"')
-      buildConfigField(BOOLEAN, CRASHLYTICS, FALSE)
+      buildConfigField(BOOLEAN, CRASHLYTICS, TRUE)
+      ext.betaDistributionGroupAliases="mgca-testers"
+      ext.betaDistributionReleaseNotesFilePath=file('release_notes.txt')
     }
 
     preprod.initWith(buildTypes.debug)
@@ -58,7 +60,9 @@ android {
       applicationIdSuffix ".preprod"
       versionNameSuffix " - pre" + " - " + getDate()
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/preprod"')
-      buildConfigField(BOOLEAN, CRASHLYTICS, TRUE)
+      buildConfigField(BOOLEAN, CRASHLYTICS, FALSE)
+      ext.betaDistributionGroupAliases="mgca-testers"
+      ext.betaDistributionReleaseNotesFilePath=file('release_notes.txt')
     }
 
     release {
@@ -67,11 +71,6 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
       buildConfigField(STRING, BASE_URL, '"http://jsonplaceholder.typicode.com/release"')
       buildConfigField(BOOLEAN, CRASHLYTICS, TRUE)
-    }
-
-    compileOptions {
-      sourceCompatibility JavaVersion.VERSION_1_7
-      targetCompatibility JavaVersion.VERSION_1_7
     }
   }
 }

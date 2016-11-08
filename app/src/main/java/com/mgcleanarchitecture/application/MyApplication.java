@@ -2,6 +2,7 @@ package com.mgcleanarchitecture.application;
 
 import android.app.Application;
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 import com.mgcleanarchitecture.BuildConfig;
 import com.mgcleanarchitecture.di.component.ApplicationComponent;
 import com.mgcleanarchitecture.di.component.MyAppComponent;
@@ -23,13 +24,19 @@ public class MyApplication extends Application {
   @Override public void onCreate() {
     super.onCreate();
     initFabric();
+    Fabric.with(this, new Crashlytics());
     injectComponents();
     Timber.plant(new Timber.DebugTree());
   }
 
   private void initFabric() {
     if (BuildConfig.CRASHLYTICS) {
-      Fabric.with(this, new Crashlytics());
+      final Fabric fabric = new Fabric.Builder(this)
+          .kits(new Crashlytics())
+          .kits(new Answers())
+          .debuggable(true)
+          .build();
+      Fabric.with(fabric);
     }
   }
 

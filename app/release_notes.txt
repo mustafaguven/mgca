@@ -1,0 +1,4 @@
+## Release Notes ##
+
+1. Fabric entegrasyonu ve ayarlaması yapıldı.
+2. Release notes yapısı eklendi.

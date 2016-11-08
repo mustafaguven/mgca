@@ -47,6 +47,8 @@ captures/
 *.iml
 .idea/workspace.xml
 
-# Keystore files
+# Fabric
+fabric.properties
 
+# Keystore files
 
